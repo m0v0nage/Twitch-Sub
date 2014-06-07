@@ -13,7 +13,6 @@ namespace MiniTwitchSub
     public class TwitchAPICaller
     {
         private string authCode;
-        private string token;
         private RestClient client;
         private string channelName;
         private readonly string url = "https://api.twitch.tv/kraken/";
