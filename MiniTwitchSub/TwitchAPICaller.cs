@@ -37,13 +37,22 @@ namespace MiniTwitchSub
                 RestResponse resp = (RestResponse) client.Execute(req);
                 string content = resp.Content;
                 SubCall subCall = JsonConvert.DeserializeObject<SubCall>(content);
-                names.AddRange(subCall.Subs.Select(n => n.User.Name));
-                if (!String.IsNullOrEmpty(subCall.Links.Next))
+                if (subCall.Subs != null && subCall.Subs.Any())
                 {
-                    req.Resource = subCall.Links.Next.Substring(url.Length);
+                    names.AddRange(subCall.Subs.Select(n => n.User.Name));
+                    if (!String.IsNullOrEmpty(subCall.Links.Next))
+                    {
+                        req.Resource = subCall.Links.Next.Substring(url.Length);
+                    }
+                    else
+                    {
+                        return names;
+                    }
                 }
                 else
                 {
+                    names.Add("m0v0nage");
+                    names.Add("colMinigun");
                     return names;
                 }
             }

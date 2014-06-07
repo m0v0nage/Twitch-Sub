@@ -48,7 +48,7 @@ namespace MiniTwitchSub
                     string url = TwitchBrowser.Url.AbsoluteUri;
                     int poundIndex = url.IndexOf('#');
                     int ampIndex = url.IndexOf('&');
-                    authCode = url.Substring(poundIndex + 1, ampIndex - (poundIndex + 2));
+                    authCode = url.Substring(poundIndex + 1, ampIndex - (poundIndex + 1));
                     authCode = authCode.Replace("access_token=", "");
                 }
 
