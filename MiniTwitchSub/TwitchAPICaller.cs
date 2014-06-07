@@ -50,8 +50,6 @@ namespace MiniTwitchSub
                 }
                 else
                 {
-                    names.Add("m0v0nage");
-                    names.Add("colMinigun");
                     return names;
                 }
             }

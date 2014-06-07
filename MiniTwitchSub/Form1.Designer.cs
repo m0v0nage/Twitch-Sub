@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.CaptureButton = new System.Windows.Forms.Button();
             this.TwitchBrowser = new System.Windows.Forms.WebBrowser();
@@ -42,6 +43,7 @@
             this.ChannelNameField = new System.Windows.Forms.TextBox();
             this.ChannelNameLabel = new System.Windows.Forms.Label();
             this.BrowseButton = new System.Windows.Forms.Button();
+            this.SubUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // CaptureButton
@@ -50,7 +52,7 @@
             this.CaptureButton.Name = "CaptureButton";
             this.CaptureButton.Size = new System.Drawing.Size(160, 62);
             this.CaptureButton.TabIndex = 7;
-            this.CaptureButton.Text = "Capture";
+            this.CaptureButton.Text = "Begin Capture";
             this.CaptureButton.Click += new System.EventHandler(this.CaptureButton_Click);
             // 
             // TwitchBrowser
@@ -148,6 +150,11 @@
             this.BrowseButton.UseVisualStyleBackColor = true;
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
+            // SubUpdateTimer
+            // 
+            this.SubUpdateTimer.Interval = 3000;
+            this.SubUpdateTimer.Tick += new System.EventHandler(this.SubUpdateTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,7 +174,7 @@
             this.Controls.Add(this.CaptureButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Minigun Sub Reader";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,6 +195,7 @@
         private System.Windows.Forms.TextBox ChannelNameField;
         private System.Windows.Forms.Label ChannelNameLabel;
         private System.Windows.Forms.Button BrowseButton;
+        private System.Windows.Forms.Timer SubUpdateTimer;
     }
 }
 

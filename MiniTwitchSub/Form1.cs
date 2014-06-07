@@ -71,6 +71,19 @@ namespace MiniTwitchSub
             }
         }
 
+        private void CaptureLoop()
+        {
+            List<string> names = twAPI.GetSubscribers();
+
+            using (StreamWriter file = new StreamWriter(FileLocationField.Text))
+            {
+                foreach (string name in names)
+                {
+                    file.Write(name + ", ");
+                }
+            }
+        }
+
         private void CaptureButton_Click(object sender, EventArgs e)
         {
             if (twAPI == null)
@@ -78,7 +91,6 @@ namespace MiniTwitchSub
                 MessageBox.Show("Please Authorize you Client ID first.");
                 return;
             }
-            List<string> names = twAPI.GetSubscribers();
 
             if (String.IsNullOrEmpty(FileLocationField.Text))
             {
@@ -86,15 +98,14 @@ namespace MiniTwitchSub
                 return;
             }
 
-            using (StreamWriter file = new StreamWriter(FileLocationField.Text))
-            {
-                foreach (string name in names)
-                {
-                    file.WriteLine(name);
-                }
-            }
+            SubUpdateTimer.Enabled = !SubUpdateTimer.Enabled;
 
-            MessageBox.Show("Subscribers written to: " + FileLocationField.Text);
+            CaptureButton.Text = SubUpdateTimer.Enabled ? "Capturing..." : "Begin Capture";
+        }
+
+        private void SubUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            CaptureLoop();
         }
     }
 }
