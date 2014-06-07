@@ -36,11 +36,17 @@
             this.ClientIdLabel = new System.Windows.Forms.Label();
             this.RedirectURIField = new System.Windows.Forms.TextBox();
             this.RedirectURILabel = new System.Windows.Forms.Label();
+            this.FileLocationLabel = new System.Windows.Forms.Label();
+            this.FileLocationDialog = new System.Windows.Forms.SaveFileDialog();
+            this.FileLocationField = new System.Windows.Forms.TextBox();
+            this.ChannelNameField = new System.Windows.Forms.TextBox();
+            this.ChannelNameLabel = new System.Windows.Forms.Label();
+            this.BrowseButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CaptureButton
             // 
-            this.CaptureButton.Location = new System.Drawing.Point(178, 58);
+            this.CaptureButton.Location = new System.Drawing.Point(178, 104);
             this.CaptureButton.Name = "CaptureButton";
             this.CaptureButton.Size = new System.Drawing.Size(160, 62);
             this.CaptureButton.TabIndex = 7;
@@ -57,7 +63,7 @@
             // 
             // AuthorizeButton
             // 
-            this.AuthorizeButton.Location = new System.Drawing.Point(12, 58);
+            this.AuthorizeButton.Location = new System.Drawing.Point(12, 104);
             this.AuthorizeButton.Name = "AuthorizeButton";
             this.AuthorizeButton.Size = new System.Drawing.Size(160, 62);
             this.AuthorizeButton.TabIndex = 6;
@@ -75,7 +81,7 @@
             // ClientIdLabel
             // 
             this.ClientIdLabel.AutoSize = true;
-            this.ClientIdLabel.Location = new System.Drawing.Point(12, 12);
+            this.ClientIdLabel.Location = new System.Drawing.Point(9, 12);
             this.ClientIdLabel.Name = "ClientIdLabel";
             this.ClientIdLabel.Size = new System.Drawing.Size(47, 13);
             this.ClientIdLabel.TabIndex = 9;
@@ -91,17 +97,64 @@
             // RedirectURILabel
             // 
             this.RedirectURILabel.AutoSize = true;
-            this.RedirectURILabel.Location = new System.Drawing.Point(12, 35);
+            this.RedirectURILabel.Location = new System.Drawing.Point(9, 35);
             this.RedirectURILabel.Name = "RedirectURILabel";
             this.RedirectURILabel.Size = new System.Drawing.Size(69, 13);
             this.RedirectURILabel.TabIndex = 11;
             this.RedirectURILabel.Text = "Redirect URI";
+            // 
+            // FileLocationLabel
+            // 
+            this.FileLocationLabel.AutoSize = true;
+            this.FileLocationLabel.Location = new System.Drawing.Point(9, 80);
+            this.FileLocationLabel.Name = "FileLocationLabel";
+            this.FileLocationLabel.Size = new System.Drawing.Size(67, 13);
+            this.FileLocationLabel.TabIndex = 12;
+            this.FileLocationLabel.Text = "File Location";
+            // 
+            // FileLocationField
+            // 
+            this.FileLocationField.Location = new System.Drawing.Point(88, 78);
+            this.FileLocationField.Name = "FileLocationField";
+            this.FileLocationField.Size = new System.Drawing.Size(141, 20);
+            this.FileLocationField.TabIndex = 13;
+            // 
+            // ChannelNameField
+            // 
+            this.ChannelNameField.Location = new System.Drawing.Point(88, 55);
+            this.ChannelNameField.Name = "ChannelNameField";
+            this.ChannelNameField.Size = new System.Drawing.Size(214, 20);
+            this.ChannelNameField.TabIndex = 14;
+            // 
+            // ChannelNameLabel
+            // 
+            this.ChannelNameLabel.AutoSize = true;
+            this.ChannelNameLabel.Location = new System.Drawing.Point(9, 58);
+            this.ChannelNameLabel.Name = "ChannelNameLabel";
+            this.ChannelNameLabel.Size = new System.Drawing.Size(77, 13);
+            this.ChannelNameLabel.TabIndex = 15;
+            this.ChannelNameLabel.Text = "Channel Name";
+            // 
+            // BrowseButton
+            // 
+            this.BrowseButton.Location = new System.Drawing.Point(235, 76);
+            this.BrowseButton.Name = "BrowseButton";
+            this.BrowseButton.Size = new System.Drawing.Size(67, 23);
+            this.BrowseButton.TabIndex = 16;
+            this.BrowseButton.Text = "Browse...";
+            this.BrowseButton.UseVisualStyleBackColor = true;
+            this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1114, 635);
+            this.Controls.Add(this.BrowseButton);
+            this.Controls.Add(this.ChannelNameLabel);
+            this.Controls.Add(this.ChannelNameField);
+            this.Controls.Add(this.FileLocationField);
+            this.Controls.Add(this.FileLocationLabel);
             this.Controls.Add(this.RedirectURILabel);
             this.Controls.Add(this.RedirectURIField);
             this.Controls.Add(this.ClientIdLabel);
@@ -126,6 +179,12 @@
         private System.Windows.Forms.Label ClientIdLabel;
         private System.Windows.Forms.TextBox RedirectURIField;
         private System.Windows.Forms.Label RedirectURILabel;
+        private System.Windows.Forms.Label FileLocationLabel;
+        private System.Windows.Forms.SaveFileDialog FileLocationDialog;
+        private System.Windows.Forms.TextBox FileLocationField;
+        private System.Windows.Forms.TextBox ChannelNameField;
+        private System.Windows.Forms.Label ChannelNameLabel;
+        private System.Windows.Forms.Button BrowseButton;
     }
 }
 
