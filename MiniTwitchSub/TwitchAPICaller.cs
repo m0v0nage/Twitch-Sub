@@ -26,10 +26,10 @@ namespace MiniTwitchSub
             client.AddDefaultHeader("Authorization", "OAuth " + authCode);
         }
 
-        private List<String> getSubscribers()
+        public List<String> GetSubscribers()
         {
             List<string> names = new List<string>();
-            RestRequest req = new RestRequest("channels/{channelName}/subscription", Method.GET);
+            RestRequest req = new RestRequest("channels/{channelName}/subscriptions", Method.GET);
             req.AddUrlSegment("channelName", channelName);
 
             while (true)

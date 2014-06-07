@@ -51,12 +51,14 @@
             this.CaptureButton.Size = new System.Drawing.Size(160, 62);
             this.CaptureButton.TabIndex = 7;
             this.CaptureButton.Text = "Capture";
+            this.CaptureButton.Click += new System.EventHandler(this.CaptureButton_Click);
             // 
             // TwitchBrowser
             // 
             this.TwitchBrowser.Location = new System.Drawing.Point(374, 9);
             this.TwitchBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.TwitchBrowser.Name = "TwitchBrowser";
+            this.TwitchBrowser.ScriptErrorsSuppressed = true;
             this.TwitchBrowser.Size = new System.Drawing.Size(719, 611);
             this.TwitchBrowser.TabIndex = 5;
             this.TwitchBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.TwitchBrowser_DocumentCompleted);
@@ -75,8 +77,8 @@
             // 
             this.ClientIdField.Location = new System.Drawing.Point(88, 9);
             this.ClientIdField.Name = "ClientIdField";
-            this.ClientIdField.Size = new System.Drawing.Size(214, 20);
-            this.ClientIdField.TabIndex = 8;
+            this.ClientIdField.Size = new System.Drawing.Size(250, 20);
+            this.ClientIdField.TabIndex = 1;
             // 
             // ClientIdLabel
             // 
@@ -91,8 +93,9 @@
             // 
             this.RedirectURIField.Location = new System.Drawing.Point(88, 32);
             this.RedirectURIField.Name = "RedirectURIField";
-            this.RedirectURIField.Size = new System.Drawing.Size(214, 20);
-            this.RedirectURIField.TabIndex = 10;
+            this.RedirectURIField.Size = new System.Drawing.Size(250, 20);
+            this.RedirectURIField.TabIndex = 2;
+            this.RedirectURIField.Text = "http://localhost";
             // 
             // RedirectURILabel
             // 
@@ -116,15 +119,15 @@
             // 
             this.FileLocationField.Location = new System.Drawing.Point(88, 78);
             this.FileLocationField.Name = "FileLocationField";
-            this.FileLocationField.Size = new System.Drawing.Size(141, 20);
-            this.FileLocationField.TabIndex = 13;
+            this.FileLocationField.Size = new System.Drawing.Size(177, 20);
+            this.FileLocationField.TabIndex = 4;
             // 
             // ChannelNameField
             // 
             this.ChannelNameField.Location = new System.Drawing.Point(88, 55);
             this.ChannelNameField.Name = "ChannelNameField";
-            this.ChannelNameField.Size = new System.Drawing.Size(214, 20);
-            this.ChannelNameField.TabIndex = 14;
+            this.ChannelNameField.Size = new System.Drawing.Size(250, 20);
+            this.ChannelNameField.TabIndex = 3;
             // 
             // ChannelNameLabel
             // 
@@ -137,10 +140,10 @@
             // 
             // BrowseButton
             // 
-            this.BrowseButton.Location = new System.Drawing.Point(235, 76);
+            this.BrowseButton.Location = new System.Drawing.Point(271, 78);
             this.BrowseButton.Name = "BrowseButton";
-            this.BrowseButton.Size = new System.Drawing.Size(67, 23);
-            this.BrowseButton.TabIndex = 16;
+            this.BrowseButton.Size = new System.Drawing.Size(67, 21);
+            this.BrowseButton.TabIndex = 5;
             this.BrowseButton.Text = "Browse...";
             this.BrowseButton.UseVisualStyleBackColor = true;
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);

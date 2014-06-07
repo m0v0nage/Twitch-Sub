@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace MiniTwitchSub
             if (String.IsNullOrEmpty(clientId) || String.IsNullOrEmpty(redirectURI))
             {
                 MessageBox.Show("Please fill out the \"Client ID\" and \"Redirect URI\" fields.");
+                return;
             }
 
             TwitchBrowser.Navigate("https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id=" + clientId + "&redirect_uri=" + redirectURI + "&scope=channel_subscriptions");
@@ -46,12 +48,14 @@ namespace MiniTwitchSub
                     string url = TwitchBrowser.Url.AbsoluteUri;
                     int poundIndex = url.IndexOf('#');
                     int ampIndex = url.IndexOf('&');
-                    authCode = url.Substring(poundIndex + 1, ampIndex - poundIndex + 1);
+                    authCode = url.Substring(poundIndex + 1, ampIndex - (poundIndex + 2));
+                    authCode = authCode.Replace("access_token=", "");
                 }
 
                 if (String.IsNullOrEmpty(ChannelNameField.Text))
                 {
                     MessageBox.Show("You need a channel name!");
+                    return;
                 }
 
                 twAPI = new TwitchAPICaller(authCode, ChannelNameField.Text);
@@ -63,6 +67,25 @@ namespace MiniTwitchSub
             if (FileLocationDialog.ShowDialog() == DialogResult.OK)
             {
                 FileLocationField.Text = FileLocationDialog.FileName;
+            }
+        }
+
+        private void CaptureButton_Click(object sender, EventArgs e)
+        {
+            List<string> names = twAPI.GetSubscribers();
+
+            if (String.IsNullOrEmpty(FileLocationField.Text))
+            {
+                MessageBox.Show("Please select a file location.");
+                return;
+            }
+
+            using (StreamWriter file = new StreamWriter(FileLocationField.Text))
+            {
+                foreach (string name in names)
+                {
+                    file.WriteLine(name);
+                }
             }
         }
     }
