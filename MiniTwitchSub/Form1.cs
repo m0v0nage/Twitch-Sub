@@ -59,6 +59,7 @@ namespace MiniTwitchSub
                 }
 
                 twAPI = new TwitchAPICaller(authCode, ChannelNameField.Text);
+                MessageBox.Show("Application has been authorized for your channel.");
             }
         }
 
@@ -72,6 +73,11 @@ namespace MiniTwitchSub
 
         private void CaptureButton_Click(object sender, EventArgs e)
         {
+            if (twAPI == null)
+            {
+                MessageBox.Show("Please Authorize you Client ID first.");
+                return;
+            }
             List<string> names = twAPI.GetSubscribers();
 
             if (String.IsNullOrEmpty(FileLocationField.Text))
@@ -87,6 +93,8 @@ namespace MiniTwitchSub
                     file.WriteLine(name);
                 }
             }
+
+            MessageBox.Show("Subscribers written to: " + FileLocationField.Text);
         }
     }
 }
