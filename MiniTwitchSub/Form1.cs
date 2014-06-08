@@ -5,9 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using RestSharp.Deserializers;
 
 namespace MiniTwitchSub
 {
@@ -20,6 +23,7 @@ namespace MiniTwitchSub
         {
             InitializeComponent();
             prevNames = new List<string>();
+            startUpChecks();
         }
 
         private void goToAuthroization()
@@ -34,6 +38,53 @@ namespace MiniTwitchSub
             }
 
             TwitchBrowser.Navigate("https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id=" + clientId + "&redirect_uri=" + redirectURI + "&scope=channel_subscriptions");
+        }
+
+        private void startUpChecks()
+        {
+            string savedPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\config.json";
+            if (File.Exists(savedPath))
+            {
+                string content;
+                using (StreamReader file = new StreamReader(savedPath))
+                {
+                    content = file.ReadToEnd();
+                }
+
+                SettingsConfig conf;
+
+                try
+                {
+                    conf = JsonConvert.DeserializeObject<SettingsConfig>(content);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
+
+                if (conf != null)
+                {
+                    ClientIdField.Text = conf.ClientId;
+                    RedirectURIField.Text = conf.RedirectURI;
+                    ChannelNameField.Text = conf.ChannelName;
+                    FileLocationField.Text = conf.FileLocation;
+                }
+            }
+        }
+
+        private void writeConfig()
+        {
+            string savePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\config.json";
+
+            using (StreamWriter file = new StreamWriter(savePath))
+            {
+                file.WriteLine("{");
+                file.WriteLine("client: \"" + ClientIdField.Text + "\",");
+                file.WriteLine("redirect: \"" + RedirectURIField.Text + "\",");
+                file.WriteLine("channel: \"" + ChannelNameField.Text + "\",");
+                file.WriteLine("file: \"" + FileLocationField.Text.Replace(@"\", @"\\") + "\",");
+                file.WriteLine("}");
+            }
         }
 
         private void AuthorizeButton_Click(object sender, EventArgs e)
@@ -61,7 +112,9 @@ namespace MiniTwitchSub
                 }
 
                 twAPI = new TwitchAPICaller(authCode, ChannelNameField.Text);
-                MessageBox.Show("Application has been authorized for your channel.");
+                AuthorizedLabel.Text = "Authorized";
+                AuthorizedLabel.ForeColor = Color.ForestGreen;
+                writeConfig();
             }
         }
 
@@ -125,7 +178,18 @@ namespace MiniTwitchSub
 
             SubUpdateTimer.Enabled = !SubUpdateTimer.Enabled;
 
-            CaptureButton.Text = SubUpdateTimer.Enabled ? "Capturing..." : "Begin Capture";
+            if (SubUpdateTimer.Enabled)
+            {
+                CaptureButton.Text = "Stop Capture";
+                CapturingLabel.Text = "Capturing";
+                CapturingLabel.ForeColor = Color.ForestGreen;
+            }
+            else
+            {
+                CaptureButton.Text = "Begin Capture";
+                CapturingLabel.Text = "Not Capturing";
+                CapturingLabel.ForeColor = Color.Red;
+            }
         }
 
         private void SubUpdateTimer_Tick(object sender, EventArgs e)

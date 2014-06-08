@@ -46,6 +46,8 @@
             this.SubUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.SubCountField = new System.Windows.Forms.TextBox();
             this.SubCountLabel = new System.Windows.Forms.Label();
+            this.CapturingLabel = new System.Windows.Forms.Label();
+            this.AuthorizedLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CaptureButton
@@ -159,7 +161,7 @@
             // 
             // SubCountField
             // 
-            this.SubCountField.Location = new System.Drawing.Point(88, 195);
+            this.SubCountField.Location = new System.Drawing.Point(88, 199);
             this.SubCountField.Name = "SubCountField";
             this.SubCountField.Size = new System.Drawing.Size(40, 20);
             this.SubCountField.TabIndex = 16;
@@ -168,17 +170,41 @@
             // SubCountLabel
             // 
             this.SubCountLabel.AutoSize = true;
-            this.SubCountLabel.Location = new System.Drawing.Point(9, 198);
+            this.SubCountLabel.Location = new System.Drawing.Point(9, 202);
             this.SubCountLabel.Name = "SubCountLabel";
             this.SubCountLabel.Size = new System.Drawing.Size(73, 13);
             this.SubCountLabel.TabIndex = 17;
             this.SubCountLabel.Text = "Subs to Show";
+            // 
+            // CapturingLabel
+            // 
+            this.CapturingLabel.AutoSize = true;
+            this.CapturingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CapturingLabel.ForeColor = System.Drawing.Color.Red;
+            this.CapturingLabel.Location = new System.Drawing.Point(189, 169);
+            this.CapturingLabel.Name = "CapturingLabel";
+            this.CapturingLabel.Size = new System.Drawing.Size(144, 25);
+            this.CapturingLabel.TabIndex = 18;
+            this.CapturingLabel.Text = "Not Capturing";
+            // 
+            // AuthorizedLabel
+            // 
+            this.AuthorizedLabel.AutoSize = true;
+            this.AuthorizedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AuthorizedLabel.ForeColor = System.Drawing.Color.Red;
+            this.AuthorizedLabel.Location = new System.Drawing.Point(18, 169);
+            this.AuthorizedLabel.Name = "AuthorizedLabel";
+            this.AuthorizedLabel.Size = new System.Drawing.Size(154, 25);
+            this.AuthorizedLabel.TabIndex = 19;
+            this.AuthorizedLabel.Text = "Not Authorized";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1114, 635);
+            this.Controls.Add(this.AuthorizedLabel);
+            this.Controls.Add(this.CapturingLabel);
             this.Controls.Add(this.SubCountLabel);
             this.Controls.Add(this.SubCountField);
             this.Controls.Add(this.BrowseButton);
@@ -219,6 +245,8 @@
         private System.Windows.Forms.Timer SubUpdateTimer;
         private System.Windows.Forms.TextBox SubCountField;
         private System.Windows.Forms.Label SubCountLabel;
+        private System.Windows.Forms.Label CapturingLabel;
+        private System.Windows.Forms.Label AuthorizedLabel;
     }
 }
 
