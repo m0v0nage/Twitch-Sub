@@ -44,6 +44,8 @@
             this.ChannelNameLabel = new System.Windows.Forms.Label();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.SubUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.SubCountField = new System.Windows.Forms.TextBox();
+            this.SubCountLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CaptureButton
@@ -155,11 +157,30 @@
             this.SubUpdateTimer.Interval = 3000;
             this.SubUpdateTimer.Tick += new System.EventHandler(this.SubUpdateTimer_Tick);
             // 
+            // SubCountField
+            // 
+            this.SubCountField.Location = new System.Drawing.Point(88, 195);
+            this.SubCountField.Name = "SubCountField";
+            this.SubCountField.Size = new System.Drawing.Size(40, 20);
+            this.SubCountField.TabIndex = 16;
+            this.SubCountField.Text = "5";
+            // 
+            // SubCountLabel
+            // 
+            this.SubCountLabel.AutoSize = true;
+            this.SubCountLabel.Location = new System.Drawing.Point(9, 198);
+            this.SubCountLabel.Name = "SubCountLabel";
+            this.SubCountLabel.Size = new System.Drawing.Size(73, 13);
+            this.SubCountLabel.TabIndex = 17;
+            this.SubCountLabel.Text = "Subs to Show";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1114, 635);
+            this.Controls.Add(this.SubCountLabel);
+            this.Controls.Add(this.SubCountField);
             this.Controls.Add(this.BrowseButton);
             this.Controls.Add(this.ChannelNameLabel);
             this.Controls.Add(this.ChannelNameField);
@@ -196,6 +217,8 @@
         private System.Windows.Forms.Label ChannelNameLabel;
         private System.Windows.Forms.Button BrowseButton;
         private System.Windows.Forms.Timer SubUpdateTimer;
+        private System.Windows.Forms.TextBox SubCountField;
+        private System.Windows.Forms.Label SubCountLabel;
     }
 }
 

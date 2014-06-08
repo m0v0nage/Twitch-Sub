@@ -18,8 +18,6 @@ namespace MiniTwitchSub
 
         [JsonProperty("subscriptions")]
         public List<Subscription> Subs;
-
-
     }
 
     public class Links

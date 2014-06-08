@@ -15,9 +15,11 @@ namespace MiniTwitchSub
     {
         private string authCode;
         private TwitchAPICaller twAPI;
+        private List<string> prevNames; 
         public Form1()
         {
             InitializeComponent();
+            prevNames = new List<string>();
         }
 
         private void goToAuthroization()
@@ -75,13 +77,36 @@ namespace MiniTwitchSub
         {
             List<string> names = twAPI.GetSubscribers();
 
-            using (StreamWriter file = new StreamWriter(FileLocationField.Text))
+            if (names.Union(prevNames).Count() != names.Count())
             {
-                foreach (string name in names)
+                int subCount = 5;
+
+                try
                 {
-                    file.Write(name + ", ");
+                    subCount = Convert.ToInt32(SubCountField.Text);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
+
+                int skip = names.Count() - subCount;
+                if (skip < 0)
+                {
+                    skip = 0;
+                }
+
+                List<string> last = names.Skip(skip).ToList();
+                using (StreamWriter file = new StreamWriter(FileLocationField.Text))
+                {
+                    foreach (string name in last)
+                    {
+                        file.Write(name + ", ");
+                    }
                 }
             }
+
+            prevNames = names;
         }
 
         private void CaptureButton_Click(object sender, EventArgs e)
