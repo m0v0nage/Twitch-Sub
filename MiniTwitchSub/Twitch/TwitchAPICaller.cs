@@ -4,13 +4,14 @@ using System.Linq;
 using System.Net.Cache;
 using System.Text;
 using System.Threading.Tasks;
+using MiniTwitchSub.Twitch.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
-namespace MiniTwitchSub
+namespace MiniTwitchSub.Twitch
 {
-    public class TwitchAPICaller
+    public class TwitchAPICaller : ITwitchInterface
     {
         private string authCode;
         private RestClient client;
@@ -22,7 +23,7 @@ namespace MiniTwitchSub
             this.authCode = authCode;
             this.channelName = channelName;
             client = new RestClient(url);
-            client.AddDefaultHeader("Authorization", "OAuth " + authCode);
+            client.AddDefaultHeader("Authorization", "OAuth " + this.authCode);
         }
 
         public List<String> GetSubscribers()

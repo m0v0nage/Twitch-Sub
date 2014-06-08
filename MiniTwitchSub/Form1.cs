@@ -6,9 +6,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MiniTwitchSub.Twitch;
+using MiniTwitchSub.Twitch.Interfaces;
 using Newtonsoft.Json;
 using RestSharp.Deserializers;
 
@@ -17,7 +20,7 @@ namespace MiniTwitchSub
     public partial class Form1 : Form
     {
         private string authCode;
-        private TwitchAPICaller twAPI;
+        private ITwitchInterface twAPI;
         private List<string> prevNames; 
         public Form1()
         {
@@ -111,7 +114,8 @@ namespace MiniTwitchSub
                     return;
                 }
 
-                twAPI = new TwitchAPICaller(authCode, ChannelNameField.Text);
+                //twAPI = new TwitchAPICaller(authCode, ChannelNameField.Text);
+                twAPI = new FakeTwitchAPICaller();
                 AuthorizedLabel.Text = "Authorized";
                 AuthorizedLabel.ForeColor = Color.ForestGreen;
             }
@@ -125,11 +129,16 @@ namespace MiniTwitchSub
             }
         }
 
+        private bool areDifferentSubs(List<string> names)
+        {
+            return names.Intersect(prevNames).Count() != names.Count();
+        }
+
         private void CaptureLoop()
         {
             List<string> names = twAPI.GetSubscribers();
 
-            if (names.Union(prevNames).Count() != names.Count())
+            if (areDifferentSubs(names))
             {
                 int subCount = 5;
 
