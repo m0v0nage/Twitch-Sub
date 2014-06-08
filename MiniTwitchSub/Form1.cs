@@ -114,7 +114,6 @@ namespace MiniTwitchSub
                 twAPI = new TwitchAPICaller(authCode, ChannelNameField.Text);
                 AuthorizedLabel.Text = "Authorized";
                 AuthorizedLabel.ForeColor = Color.ForestGreen;
-                writeConfig();
             }
         }
 
@@ -195,6 +194,11 @@ namespace MiniTwitchSub
         private void SubUpdateTimer_Tick(object sender, EventArgs e)
         {
             CaptureLoop();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            writeConfig();
         }
     }
 }
