@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MiniTwitchSub.Twitch;
@@ -114,8 +115,8 @@ namespace MiniTwitchSub
                     return;
                 }
 
-                //twAPI = new TwitchAPICaller(authCode, ChannelNameField.Text);
-                twAPI = new FakeTwitchAPICaller();
+                twAPI = new TwitchAPICaller(authCode, ChannelNameField.Text);
+                //twAPI = new FakeTwitchAPICaller();
                 AuthorizedLabel.Text = "Authorized";
                 AuthorizedLabel.ForeColor = Color.ForestGreen;
             }
@@ -202,7 +203,8 @@ namespace MiniTwitchSub
 
         private void SubUpdateTimer_Tick(object sender, EventArgs e)
         {
-            CaptureLoop();
+            Thread t = new Thread(CaptureLoop);
+            t.Start();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

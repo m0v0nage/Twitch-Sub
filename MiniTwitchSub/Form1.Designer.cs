@@ -156,7 +156,7 @@
             // 
             // SubUpdateTimer
             // 
-            this.SubUpdateTimer.Interval = 3000;
+            this.SubUpdateTimer.Interval = 10000;
             this.SubUpdateTimer.Tick += new System.EventHandler(this.SubUpdateTimer_Tick);
             // 
             // SubCountField
